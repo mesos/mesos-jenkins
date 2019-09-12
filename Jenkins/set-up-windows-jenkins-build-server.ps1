@@ -63,7 +63,7 @@ $PACKAGES = @{
         "local_file" = Join-Path $PACKAGES_DIRECTORY "maven.zip"
     }
     "openssl" = @{
-        "url" = "https://slproweb.com/download/Win64OpenSSL-1_0_2p.exe"
+        "url" = "https://slproweb.com/download/Win64OpenSSL-1_0_2t.exe"
         "local_file" = Join-Path $PACKAGES_DIRECTORY "openssl.exe"
     }
 }
