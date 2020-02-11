@@ -59,11 +59,11 @@ $PACKAGES = @{
         "local_file" = Join-Path $PACKAGES_DIRECTORY "otp_win64.exe"
     }
     "maven" = @{
-        "url" = "http://apache.javapipe.com/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.zip"
+        "url" = "http://www.trieuvan.com/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip"
         "local_file" = Join-Path $PACKAGES_DIRECTORY "maven.zip"
     }
     "openssl" = @{
-        "url" = "https://slproweb.com/download/Win64OpenSSL-1_0_2p.exe"
+        "url" = "https://slproweb.com/download/Win64OpenSSL-1_1_1d.exe"
         "local_file" = Join-Path $PACKAGES_DIRECTORY "openssl.exe"
     }
 }
@@ -211,16 +211,6 @@ function Install-VisualStudio2017 {
     )
     Install-CITool -InstallerPath $PACKAGES["vs_2017"]["local_file"] `
                    -ArgumentList $installerArguments
-}
-
-function Install-Docker {
-    $service = Get-Service "Docker" -ErrorAction SilentlyContinue
-    if($service) {
-        Stop-Service "Docker"
-    }
-    Install-Module -Name "DockerMsftProvider" -Force
-    Install-Package -Name "Docker" -ProviderName "DockerMsftProvider" -Force -MinimumVersion "18.03.1-ee-1"
-    Start-Service "Docker"
 }
 
 function Install-Git {
@@ -386,7 +376,6 @@ function Install-PowerShellModules {
 try {
     Start-LocalPackagesDownload
     Install-VisualStudio2017
-    Install-Docker
     Install-7Zip
     Install-Msys2
     Install-Git
@@ -401,6 +390,7 @@ try {
     Install-Dig
     Install-Erlang
     Install-PowerShellModules
+    # TODO: Install Docker
     # TODO: Configure git user and e-mail
     # TODO: Generate SSH keypair
     # TODO: Authorize Git SSH Keys
